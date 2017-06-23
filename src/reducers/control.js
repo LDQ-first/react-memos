@@ -18,9 +18,21 @@ const isSidebarOpen = (state = false, action) => {
     }
 }
 
+const isAdding = (state = false, action) => {
+    switch(action.type) {
+        case TOGGLE_ADD_TODO:
+        case ADD_TODO_SUCCESS:
+            return !state
+        default: 
+            return state
+    }
+}
 
 export default combineReducers({
-    isSidebarOpen
+    isSidebarOpen,
+    isAdding
 })
 
-export const getIsSidebarOpen = (state) => state.isSidebarOpen
+export const getIsSidebarOpen = (stateControl) => stateControl.isSidebarOpen
+
+export const getIsAdding = (stateControl) => stateControl.isAdding

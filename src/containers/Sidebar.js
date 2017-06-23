@@ -15,6 +15,13 @@ const SideBar = ({isSidebarOpen, toggleSideBar}) => (
     <div className='todo-sidebar'>
         <Drawer
             open={isSidebarOpen}
+            docked={false}
+            onRequestChange={toggleSideBar}
+            overlayStyle={{
+                zIndex: 800,
+                backgroundColor: 'rgba(0,0,0, 0.3)'
+            }}
+            
         >
             <NavLink
                 to={'login'}
@@ -41,7 +48,7 @@ const SideBar = ({isSidebarOpen, toggleSideBar}) => (
     </div>
 )
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) =>  ({
     isSidebarOpen: getIsSidebarOpen(state),
 })
 

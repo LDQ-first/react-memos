@@ -6,7 +6,7 @@ export const toggleAddToDo = () => ({
     type: 'TOGGLE_ADD_TODO'
 })
 
-export const toggleSideBar = () => ({
+export const toggleSideBar = () =>  ({
     type: 'TOGGLE_SIDEBAR'
 })
 

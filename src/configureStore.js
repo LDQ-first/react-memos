@@ -1,4 +1,4 @@
-import { initLeanCloud } from './api'
+import { initLeanCloud, testAV} from './api'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
@@ -6,6 +6,7 @@ import reducer from './reducers'
 
 export default () => {
     initLeanCloud()
+    /*testAV()*/
 
     const middlewares = [thunk, createLogger()]
    

@@ -14,7 +14,9 @@ const AppBar = ({toggleSideBar}) => (
     <div className='todo-appbar'>
         <TopBar 
             title='react-memos'
-
+            iconElementLeft={
+                <NavButton onClick={toggleSideBar}/>
+            }
         />
     </div>
 )

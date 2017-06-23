@@ -17,3 +17,6 @@ export default combineReducers({
 export const getIsSidebarOpen = (state) => 
     fromControl.getIsSidebarOpen(state.control)
 
+export const getIsAdding = (state) => 
+    fromControl.getIsAdding(state.control)
+

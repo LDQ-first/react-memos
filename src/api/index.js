@@ -11,3 +11,10 @@ export const initLeanCloud = () => {
     })
 }
 
+
+export const testAV = async () => {
+    const TestObject = AV.Object.extend('TestObject');
+    const testObject = new TestObject();
+    await testObject.save({ words: 'Hello World!' });
+    alert('LeanCloud Rocks!');
+}

@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import AddTodo from '../containers/AddTodo'
+import VisibleTodoList from '../containers/VisibleTodoList'
+import BottomBar from './BottomBar'
+
 
 class Main extends Component {
     componentDidMount () {
@@ -11,7 +15,9 @@ class Main extends Component {
 
         return (
             <div className='todo-main'>
-                
+                <AddTodo />
+                <VisibleTodoList />
+                <BottomBar />
             </div>
         )
     }
