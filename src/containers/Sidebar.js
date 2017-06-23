@@ -8,33 +8,46 @@ import MainList from 'material-ui/svg-icons/action/assignment'
 import Face from 'material-ui/svg-icons/action/face'
 import FontIcon from 'material-ui/FontIcon'
 import NormalLink from '../styled/NormalLink'
+import * as actions from '../actions'
+import { getIsSidebarOpen } from '../reducers'
 
-
-const SideBar = ({}) => (
+const SideBar = ({isSidebarOpen, toggleSideBar}) => (
     <div className='todo-sidebar'>
-        <Drawer>
-            <NavLink>
+        <Drawer
+            open={isSidebarOpen}
+        >
+            <NavLink
+                to={'login'}
+                >
                 <MenuItem />
             </NavLink>
-            <NavLink>
+            <NavLink
+                 to='all'
+                 >
                 <MenuItem />
             </NavLink>
-            <NavLink>
+            <NormalLink
+                 href='https://github.com/LDQ-first/react-memos-2'
+                 target='_blank'
+                 >
                 <MenuItem />
-            </NavLink>
-            <NavLink>
+            </NormalLink>
+            <NormalLink
+                 href='https://github.com/LDQ-first'
+                 target='_blank'>
                 <MenuItem />
-            </NavLink>
+            </NormalLink>
         </Drawer>
     </div>
 )
 
-const mapStateToProps = (state) => {
-
-}
+const mapStateToProps = (state) => ({
+    isSidebarOpen: getIsSidebarOpen(state),
+})
 
 export default withRouter(
     connect(
         mapStateToProps,
+        actions
     )(SideBar)
 )

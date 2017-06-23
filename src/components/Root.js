@@ -76,10 +76,10 @@ export default class Root extends Component {
     }
 
     render () {
-        /*const {store} = this.props*/
+        const {store} = this.props
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <Provider >
+                <Provider store={store}>
                    <Router history={createHistory()}>
                       <App />
                    </Router>
