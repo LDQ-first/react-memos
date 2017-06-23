@@ -5,7 +5,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import * as actions from '../actions'
 import Scroller from '../styled/Scroller'
 import ListContainer from '../styled/ListContainer'
-
+import TodoList from '../components/TodoList'
 
 class VisibleTodoList extends Component {
 
