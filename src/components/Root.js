@@ -48,6 +48,14 @@ injectGlobal`
     font-size: 100%;
     font-family: inherit;
   }
+
+  select {
+    option {
+      color: #000;
+      font-weight: bold;
+    }
+  }
+  
 `
 
 /**
