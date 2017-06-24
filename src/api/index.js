@@ -18,3 +18,29 @@ export const testAV = async () => {
     await testObject.save({ words: 'Hello World!' });
     alert('LeanCloud Rocks!');
 }
+
+
+export const signUp = (username, password) => {
+    const newUser = new AV.User()
+    newUser.setUsername(username)
+    newUser.setPassword(password)
+    return newUser.signUp()
+}
+
+export const login = (username, password) => {
+    return AV.User.logIn(username, password)
+}
+
+export const logOut = () => AV.User.logOut()
+
+export const getCurrentUser = () => AV.User.current()
+
+
+
+export const addTo = (text, due) => {
+
+
+    
+}
+
+

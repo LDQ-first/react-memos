@@ -28,11 +28,26 @@ const isAdding = (state = false, action) => {
     }
 }
 
+const isLogging = (state = false, action) => {
+    switch (action.type) {
+        case USER_LOGIN_REQUEST:
+            return state = true
+        case USER_LOGIN_SUCCESS:
+        case USER_LOGIN_FAILURE: 
+            return state = false
+        default: 
+            return state
+    }
+}
+
 export default combineReducers({
     isSidebarOpen,
-    isAdding
+    isAdding,
+    isLogging
 })
 
 export const getIsSidebarOpen = (stateControl) => stateControl.isSidebarOpen
 
 export const getIsAdding = (stateControl) => stateControl.isAdding
+
+export const getIsLogging = (stateControl) => stateControl.isLogging

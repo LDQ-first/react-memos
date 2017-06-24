@@ -7,9 +7,18 @@ import LoginInfo from '../styled/LoginInfo'
 import Button from '../styled/Button'
 import Welcome from '../styled/Welcome'
 import LoginIndicator from '../styled/LoginIndicator'
-
+import errorMsgTranslator from '../api/errorMsgTranslator'
+import { login, logOut } from '../actions'
+import { getIsLogging, getLogError, getCurrentUser } from '../reducers'
 
 class Login extends Component {
+
+    componentDidMount () {
+        console.log('login loaded')
+    }
+
+    
+
 
     render () {
         

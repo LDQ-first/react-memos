@@ -16,14 +16,6 @@ export default class AddTodoPanel extends Component {
         return new Date().toJSON().slice(0, 10)
     }
 
-    handleKeyPressSubmit = ({keyCode, ctrlKey }) => {
-        const due = new Date(this.datePicker.value)
-        if(keyCode === 13 && ctrlKey && this.textarea.value.trim()) {
-            console.log(this.textarea.value.trim(), due)
-        }
-
-    }
-
     quickPick = () => {
         let msec = +new Date(this.datePicker.value)
         const diff = this.select.value * 24 * 3600 * 1000
@@ -31,8 +23,15 @@ export default class AddTodoPanel extends Component {
         this.datePicker.value = new Date(msec).toJSON().slice(0, 10)
     } 
 
-    handleSubmit = () => {
+    handleKeyPressSubmit = ({keyCode, ctrlKey }) => {
+        if(keyCode === 13 && ctrlKey && this.textarea.value.trim()) {
+            this.handleSubmit()
+        }
+    }
 
+    handleSubmit = () => {
+        const due = new Date(this.datePicker.value)
+        console.log(this.textarea.value.trim(), due)
     }
 
     render() {
@@ -43,7 +42,8 @@ export default class AddTodoPanel extends Component {
                     placeholder = {'添加点什么呢？'}
                     onKeyDown = {this.handleKeyPressSubmit}
                     innerRef = {node => { this.textarea = node }}
-                    title = ' 按Ctrl + Enter直接发送 '
+                    title = '按Ctrl + Enter直接发送'
+                    spellcheck="false"
                 />
                 <Schedule>
                     <div>
@@ -51,6 +51,7 @@ export default class AddTodoPanel extends Component {
                             defaultValue = {8}
                             ref = {node => this.select = node}
                             onChange = {this.quickPick}
+                            title = '完成日期'
                         >
                             <option value='0'>今天</option>
                             <option value='1'>明天</option>
@@ -68,6 +69,7 @@ export default class AddTodoPanel extends Component {
                         <DatePicker
                             innerRef={node => this.datePicker = node}
                             type='date'
+                            title = '完成日期'
                         />
                     </div>
 
