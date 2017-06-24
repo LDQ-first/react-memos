@@ -5,7 +5,7 @@ import control, * as fromControl from './control.js'
 import userInfo, * as fromUser from './userInfo'
 
 
-/*api.initLeanCloud()*/
+api.initLeanCloud()
 
 export default combineReducers({
     byId,

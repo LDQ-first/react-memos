@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 import reducer from './reducers'
 
 export default () => {
-    initLeanCloud()
+    /*initLeanCloud()*/
     /*testAV()*/
 
     const middlewares = [thunk, createLogger()]
