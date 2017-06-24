@@ -9,9 +9,9 @@ import Face from 'material-ui/svg-icons/action/face'
 import FontIcon from 'material-ui/FontIcon'
 import NormalLink from '../styled/NormalLink'
 import * as actions from '../actions'
-import { getIsSidebarOpen } from '../reducers'
+import { getIsSidebarOpen, getCurrentUser } from '../reducers'
 
-const SideBar = ({isSidebarOpen, toggleSideBar}) => (
+const SideBar = ({isSidebarOpen, toggleSideBar, isLogged}) => (
     <div className='todo-sidebar'>
         <Drawer
             open={isSidebarOpen}
@@ -26,18 +26,41 @@ const SideBar = ({isSidebarOpen, toggleSideBar}) => (
             <NavLink
                 to={'login'}
                 >
-                <MenuItem />
+                <MenuItem 
+                    primaryText={isLogged ? isLogged.attributes.username : '登录'}
+                    leftIcon={<Account />}
+                    onClick={toggleSideBar}
+                />
             </NavLink>
             <NavLink
                  to='all'
                  >
-                <MenuItem />
+                <MenuItem 
+                    primaryText={isLogged ? '全部事项' : '全部事项(请先登录)'}
+                    leftIcon={<MainList />}
+                    onClick={toggleSideBar}
+                />
             </NavLink>
             <NormalLink
                  href='https://github.com/LDQ-first/react-memos-2'
                  target='_blank'
                  >
-                <MenuItem />
+                <MenuItem 
+                    primaryText={'Github'}
+                    style={{color: '#3f51b5'}}
+                    leftIcon={
+                        <i 
+                            className="fa fa-github"
+                            aria-hidden="true"
+                            style={{
+                            fontSize: 24,
+                            marginLeft: 12,
+                            color: '#3f51b5'
+                            }}
+                        >
+                        </i>}
+                    onClick={toggleSideBar}
+                 />
             </NormalLink>
             <NormalLink
                  href='https://github.com/LDQ-first'
@@ -50,11 +73,10 @@ const SideBar = ({isSidebarOpen, toggleSideBar}) => (
 
 const mapStateToProps = (state) =>  ({
     isSidebarOpen: getIsSidebarOpen(state),
+    isLogged: getCurrentUser(state)
 })
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        actions
-    )(SideBar)
-)
+export default  connect(
+    mapStateToProps,
+    actions
+)(SideBar)

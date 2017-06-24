@@ -8,6 +8,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import App from './App'
+import 'font-awesome/css/font-awesome.min.css'
 
 injectTapEventPlugin()
 

@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import AddTodo from '../containers/AddTodo'
 import VisibleTodoList from '../containers/VisibleTodoList'
 import BottomBar from './BottomBar'
-
+import { getCurrentUser } from '../reducers'
 
 class Main extends Component {
     componentDidMount () {
@@ -12,19 +12,21 @@ class Main extends Component {
     }
 
     render () {
-
-        return (
+        const { isLogged } = this.props
+        return isLogged ? (
             <div className='todo-main'>
                 <AddTodo />
                 <VisibleTodoList />
                 <BottomBar />
             </div>
+        ) : (
+            <Redirect to='/login' />
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-
+    isLogged: getCurrentUser(state)
 })
 
 export default connect(mapStateToProps)(Main)
