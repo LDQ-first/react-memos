@@ -1,6 +1,7 @@
 import * as api from '../api'
 import { normalize } from 'normalizr'
 import * as schema from './schema'
+import { getIsFetching } from '../reducers'
 
 export const toggleAddToDo = () => ({
     type: 'TOGGLE_ADD_TODO'
@@ -70,6 +71,7 @@ export const addTodo = (text, due) => (dispatch) => {
             ...response.attributes,
             id: response.id
         }
+        console.log('response: ', response)
         console.log('receivedTodo: ', receivedTodo)
         console.log('schema.todo: ', schema.todo)
         console.log('normalize(receivedTodo, schema.todo): ', 
@@ -148,3 +150,38 @@ export const deleteTodo = (id) => (dispatch) => {
 }
 
 
+export const fetchTodos = (filter) => (dispatch, getState) => {
+  if (getIsFetching(getState(), filter)) {
+    return Promise.resolve()
+  }
+  dispatch({
+    type: 'FETCH_TODOS_REQUEST',
+    filter
+  })
+  return api.fetchTodos(filter).then(
+    response => {
+      const receivedTodos = response.map(todo => {
+        return {
+          ...todo.attributes,
+          id: todo.id
+        }
+      })
+      console.log('receivedTodos: ', receivedTodos)
+      console.log('schema.arrayOfTodos: ', schema.arrayOfTodos)
+      console.log('normalize(receivedTodos, schema.arrayOfTodos): ',
+      normalize(receivedTodos, schema.arrayOfTodos))
+      return dispatch({
+        type: 'FETCH_TODOS_SUCCESS',
+        filter,
+        response: normalize(receivedTodos, schema.arrayOfTodos)
+      })
+    },
+    error => {
+      dispatch({
+        type: 'FETCH_TODOS_FAILURE',
+        filter,
+        message: error.message || '获取数据出错'
+      })
+    }
+  )
+}

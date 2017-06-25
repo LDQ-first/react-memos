@@ -8,4 +8,4 @@ export default (state={}, action) => {
     return state
 }
 
-export const getTodo = (state, id) => state[id]
+export const getTodo = (stateByid, id) => stateByid[id]

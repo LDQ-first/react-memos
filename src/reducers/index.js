@@ -44,6 +44,8 @@ export const getVisibleTodos = (state, filter) => {
     const ids = fromList.getIds(state.listByFilter[filter])
     const sortedTodos = {};
     console.log('ids: ', ids);
+    console.log('state: ', state)
+    console.log('filter: ', filter)
     ids.map(id => fromById.getTodo(state.byId, id))
         .sort((a,b) => (+a.due - b.due))
         .forEach(id => {
@@ -53,5 +55,12 @@ export const getVisibleTodos = (state, filter) => {
             }
             sortedTodos[due].push(id)
         })
-        return sortedTodos
+    console.log('sortedTodos: ', sortedTodos)
+    return sortedTodos
 }
+
+export const getIsFetching = (state, filter) =>
+  fromList.getIsFetching(state.listByFilter[filter])
+
+export const getErrorMessage = (state, filter) =>
+  fromList.getErrorMessage(state.listByFilter[filter])

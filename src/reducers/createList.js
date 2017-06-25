@@ -28,6 +28,7 @@ export default (filter) => {
     const ids = (state = [], action) => {
         switch(action.type) {
             case ADD_TODO_SUCCESS:
+                console.log(filter)
                 return filter !== 'completed'
                      ? [...state, action.response.result]
                      : state
@@ -40,9 +41,50 @@ export default (filter) => {
         }
     }
 
+     const isFetching = (state = false, action) => {
+        if (action.filter !== filter) {
+        return state
+        }
+        switch (action.type) {
+        case FETCH_TODOS_REQUEST:
+            state = true
+            return state
+        case FETCH_TODOS_SUCCESS:
+        case FETCH_TODOS_FAILURE:
+            state = false
+            return state
+        default:
+            return state
+        }
+    }
+
+    const errorMessage = (state = null, action) => {
+        if (action.filter !== filter) {
+        return state
+        }
+        switch (action.type) {
+        case FETCH_TODOS_FAILURE:
+        case DELETE_TODO_FAILURE:
+        case ADD_TODO_FAILURE:
+        case TOGGLE_TODO_FAILURE:
+            return action.message
+        case FETCH_TODOS_REQUEST:
+        case FETCH_TODOS_SUCCESS:
+            return null
+        default:
+            return state
+        }
+    }
+
     return combineReducers({
-        ids
+        ids,
+        isFetching,
+        errorMessage
     })
 }
 
-export const getIds = (stateCreateList) => stateCreateList.ids
+export const getIds = (stateListByFilter) => stateListByFilter.ids
+
+export const getIsFetching = (stateListByFilter) => stateListByFilter.isFetching
+
+export const getErrorMessage = (stateListByFilter) => stateListByFilter.errorMessage

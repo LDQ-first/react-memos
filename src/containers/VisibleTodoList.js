@@ -6,9 +6,26 @@ import * as actions from '../actions'
 import Scroller from '../styled/Scroller'
 import ListContainer from '../styled/ListContainer'
 import TodoList from '../components/TodoList'
-import { getVisibleTodos } from '../reducers'
+import { getVisibleTodos, getErrorMessage, getIsFetching } from '../reducers'
 
 class VisibleTodoList extends Component {
+
+    componentDidMount() {
+        this.fetchData()
+    }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.filter !== this.props.filter) {
+            this.fetchData()
+        }
+    }
+
+    fetchData() {
+         const { filter, fetchTodos } = this.props
+         fetchTodos(filter).then(() => console.log('获取数据'))
+    }
+
+
 
     printDay(date) {
         const chineseDate = ['日', '一', '二', '三', '四', '五', '六']
@@ -65,7 +82,9 @@ const mapStateToProps = (state, {match}) => {
     const filter = match.params.filter || 'all'
     return {
         todos: getVisibleTodos(state, filter),
-        filter
+        filter,
+        errorMessage: getErrorMessage(state, filter),
+        isFecthing: getIsFetching(state, filter),
     }
 }
 
