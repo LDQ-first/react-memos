@@ -70,9 +70,10 @@ export const addTodo = (text, due) => (dispatch) => {
             ...response.attributes,
             id: response.id
         }
-        console.log(receivedTodo)
-        console.log(schema.todo)
-        console.log(normalize(receivedTodo, schema.todo))
+        console.log('receivedTodo: ', receivedTodo)
+        console.log('schema.todo: ', schema.todo)
+        console.log('normalize(receivedTodo, schema.todo): ', 
+        normalize(receivedTodo, schema.todo))
         dispatch({
             type: 'ADD_TODO_SUCCESS',
             response: normalize(receivedTodo, schema.todo)
