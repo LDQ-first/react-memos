@@ -32,6 +32,7 @@ export default class AddTodoPanel extends Component {
     handleSubmit = () => {
         const due = new Date(this.datePicker.value)
         console.log(this.textarea.value.trim(), due)
+        this.props.addTodo(this.textarea.value.trim(), due)
     }
 
     render() {

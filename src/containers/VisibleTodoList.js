@@ -26,9 +26,9 @@ class VisibleTodoList extends Component {
 }
 
 const mapStateToProps = (state, {match}) => {
-
+    const filter = match.params.filter || 'all'
     return {
-
+        filter
     }
 }
 

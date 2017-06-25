@@ -1,6 +1,6 @@
 import * as api from '../api'
 import { normalize } from 'normalizr'
-
+import * as schema from './schema'
 
 export const toggleAddToDo = () => ({
     type: 'TOGGLE_ADD_TODO'
@@ -65,5 +65,85 @@ export const logOut = () => (dispatch) => {
 
 
 export const addTodo = (text, due) => (dispatch) => {
-    
+    api.addTo(text, due).then((response) => {
+        const receivedTodo = {
+            ...response.attributes,
+            id: response.id
+        }
+        console.log(receivedTodo)
+        console.log(schema.todo)
+        console.log(normalize(receivedTodo, schema.todo))
+        dispatch({
+            type: 'ADD_TODO_SUCCESS',
+            response: normalize(receivedTodo, schema.todo)
+        })
+    }, (error) => {
+        dispatch({
+        type: 'ADD_TODO_FAILURE',
+        filter: 'all',
+        message: error.message || '添加失败，请重新尝试'
+        }
+    )
+  })
 }
+
+export const editTodo = (id, text) => (dispatch) => {
+  api.editTodo(id, text).then((response) => {
+    const receivedTodo = {
+      ...response.attributes,
+      id: response.id
+    }
+    dispatch({
+      type: 'EDIT_TODO_SUCCESS',
+      response: normalize(receivedTodo, schema.todo)
+    })
+  },
+  error => {
+    dispatch({
+      type: 'EDIT_TODO_FAILURE',
+      filter: 'all',
+      message: error.message || '编辑失败，请重新尝试'
+    })
+  })
+}
+
+export const toggleTodo = (id) => (dispatch) => {
+  api.toggleTodo(id).then((response) => {
+    const receivedTodo = {
+      ...response.attributes,
+      id: response.id
+    }
+    dispatch({
+      type: 'TOGGLE_TODO_SUCCESS',
+      response: normalize(receivedTodo, schema.todo)
+    })
+  },
+  error => {
+    dispatch({
+      type: 'TOGGLE_TODO_FAILURE',
+      filter: 'all',
+      message: error.message
+    })
+  })
+}
+
+export const deleteTodo = (id) => (dispatch) => {
+  api.deleteTodo(id)
+    .then( (res) => {
+      if (res.results.length) {
+        dispatch({
+          type: 'DELETE_TODO_SUCCESS',
+          id: id
+        })
+      }
+    },
+    error => {
+      dispatch({
+        type: 'DELETE_TODO_FAILURE',
+        filter: 'all',
+        message: error.message
+      })
+    })
+}
+
+

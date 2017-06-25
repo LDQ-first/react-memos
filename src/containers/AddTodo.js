@@ -8,7 +8,7 @@ import AddTodoPanel from '../components/AddTodoPanel'
 
 
 
-const AddTodo = ({isAdding, toggleAddToDo}) => (
+const AddTodo = ({isAdding, toggleAddToDo, addTodo}) => (
     <div className='todo-add'>
         <AddTodoButton
             isAdding = {isAdding}
@@ -18,7 +18,9 @@ const AddTodo = ({isAdding, toggleAddToDo}) => (
           transitionName='addTodo-panel'
           transitionEnterTimeout={250}
           transitionLeaveTimeout={300}>
-           { isAdding ?  <AddTodoPanel/>: null }
+           { isAdding ?  <AddTodoPanel
+               addTodo={addTodo}
+               />: null }
         </CSSTransitionGroup>
     </div>
 )

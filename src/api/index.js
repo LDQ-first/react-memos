@@ -38,9 +38,55 @@ export const getCurrentUser = () => AV.User.current()
 
 
 export const addTo = (text, due) => {
+    if(!AV.User.current()) {
+        throw new Error('你要登陆')
+    }
+    const Todos = AV.Object.extend('Todos')
+    const todo = new Todos()
+    todo.set('text', text)
+    todo.set('completed', false)
+    todo.set('due', due)
+    todo.set('owner', AV.User.current())
+    return todo.save()
+}
 
+export const editTodo = (id, text) => {
+    const query = new AV.Query('Todos')
+    return query.get(id).then((oldTodo) => {
+        const updatedTodo = AV.Object.createWithoutData('Todos', id)
+        updatedTodo.set({
+            completed: oldTodo.attributes.completed,
+            text,
+            due: oldTodo.attributes.due
+        })
+        return updatedTodo.save()
+    }, (error) => {
+        throw new Error(error)
+    })
+}
 
-    
+export const toggleTodo = (id) => {
+  const query = new AV.Query('Todos')
+  return query.get(id).then( (oldTodo) => {
+    const updatedTodo = AV.Object.createWithoutData('Todos', id)
+    updatedTodo.set({
+      completed: !oldTodo.attributes.completed,
+      text: oldTodo.attributes.text,
+      due: oldTodo.attributes.due
+    })
+    return updatedTodo.save()
+  }, (error) => {
+       throw new Error(error)
+  })
+}
+
+export const deleteTodo = (id) => {
+  return AV.Query.doCloudQuery(`delete from Todos where objectId="${id}"`)
+    .then( (res) => {
+      return res
+    }, (error) => {
+      throw new Error(error)
+    })
 }
 
 
