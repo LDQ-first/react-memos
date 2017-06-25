@@ -6,7 +6,8 @@ import MenuItem from 'material-ui/MenuItem'
 import Account from 'material-ui/svg-icons/social/person'
 import MainList from 'material-ui/svg-icons/action/assignment'
 import Face from 'material-ui/svg-icons/action/face'
-import FontIcon from 'material-ui/FontIcon'
+import Subject from 'material-ui/svg-icons/action/subject'
+/*import FontIcon from 'material-ui/FontIcon'*/
 import NormalLink from '../styled/NormalLink'
 import * as actions from '../actions'
 import { getIsSidebarOpen, getCurrentUser } from '../reducers'
@@ -25,6 +26,9 @@ const SideBar = ({isSidebarOpen, toggleSideBar, isLogged}) => (
         >
             <NavLink
                 to={'login'}
+                style={{
+                    textDecoration: 'none'
+                }}
                 >
                 <MenuItem 
                     primaryText={isLogged ? isLogged.attributes.username : '登录'}
@@ -34,6 +38,9 @@ const SideBar = ({isSidebarOpen, toggleSideBar, isLogged}) => (
             </NavLink>
             <NavLink
                  to='all'
+                 style={{
+                    textDecoration: 'none'
+                }}
                  >
                 <MenuItem 
                     primaryText={isLogged ? '全部事项' : '全部事项(请先登录)'}
@@ -42,7 +49,7 @@ const SideBar = ({isSidebarOpen, toggleSideBar, isLogged}) => (
                 />
             </NavLink>
             <NormalLink
-                 href='https://github.com/LDQ-first/react-memos-2'
+                 href='https://github.com/LDQ-first/'
                  target='_blank'
                  >
                 <MenuItem 
@@ -63,9 +70,14 @@ const SideBar = ({isSidebarOpen, toggleSideBar, isLogged}) => (
                  />
             </NormalLink>
             <NormalLink
-                 href='https://github.com/LDQ-first'
+                 href='https://github.com/LDQ-first/react-memos-2'
                  target='_blank'>
-                <MenuItem />
+                <MenuItem 
+                    primaryText={'Project'}
+                    style={{color: '#E91E63'}}
+                    leftIcon={<Subject style={{fill: '#E91E63'}} />}
+                    onClick={toggleSideBar}
+                />
             </NormalLink>
         </Drawer>
     </div>
