@@ -82,9 +82,9 @@ const mapStateToProps = (state, {match}) => {
     const filter = match.params.filter || 'all'
     return {
         todos: getVisibleTodos(state, filter),
-        filter,
         errorMessage: getErrorMessage(state, filter),
         isFecthing: getIsFetching(state, filter),
+        filter,
     }
 }
 

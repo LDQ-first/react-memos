@@ -91,23 +91,23 @@ export const deleteTodo = (id) => {
 
 
 export const fetchTodos = (filter) => {
-    const query = new AV.Query('Todos')
-    switch (filter) {
-        case 'all':
-            return query.ascending('due')
-                    .equalTo('owner', AV.User.current())
-                    .find()
-        case 'active':
-            return query.ascending('due')
-                .equalTo('completed', false)
-                .equalTo('owner', AV.User.current())
-                .find()
-        case 'completed':
-        return query.ascending('due')
-            .equalTo('completed', true)
-            .equalTo('owner', AV.User.current())
-            .find()
-        default:
-            throw new Error(`Unknown Filter: ${filter}`)
-    }
+  const query = new AV.Query('Todos')
+  switch (filter) {
+    case 'all':
+      return query.ascending('due')
+        .equalTo('owner', AV.User.current())
+        .find()
+    case 'active':
+      return query.ascending('due')
+        .equalTo('completed', false)
+        .equalTo('owner', AV.User.current())
+        .find()
+    case 'completed':
+      return query.ascending('due')
+        .equalTo('completed', true)
+        .equalTo('owner', AV.User.current())
+        .find()
+    default:
+      throw new Error(`Unknown Filter: ${filter}`)
+  }
 }

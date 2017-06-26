@@ -13,22 +13,24 @@ import {
 
 export default (filter) => {
     const handleToggle = (state, action) => {
-        console.log('action.response: ', action.response)
         const { result: toggledId, entities } = action.response
         const { completed } = entities.todos[toggledId]
         const shouldRemove = (
-            (completed && filter === 'active') ||
-            (!completed && filter === 'completed')
+        (completed && filter === 'active') ||
+        (!completed && filter === 'completed')
         )
-        return shouldRemove 
-            ? state.filter(id => id !== toggledId)
-            : state
+        return shouldRemove
+        ? state.filter(id => id !== toggledId)
+        : state
     }
 
     const ids = (state = [], action) => {
         switch(action.type) {
+            case FETCH_TODOS_SUCCESS:
+                return filter === action.filter
+                    ? action.response.result
+                    : state
             case ADD_TODO_SUCCESS:
-                console.log(filter)
                 return filter !== 'completed'
                      ? [...state, action.response.result]
                      : state
@@ -43,36 +45,36 @@ export default (filter) => {
 
      const isFetching = (state = false, action) => {
         if (action.filter !== filter) {
-        return state
+            return state
         }
         switch (action.type) {
-        case FETCH_TODOS_REQUEST:
-            state = true
-            return state
-        case FETCH_TODOS_SUCCESS:
-        case FETCH_TODOS_FAILURE:
-            state = false
-            return state
-        default:
-            return state
+            case FETCH_TODOS_REQUEST:
+                state = true
+                return state
+            case FETCH_TODOS_SUCCESS:
+            case FETCH_TODOS_FAILURE:
+                state = false
+                return state
+            default:
+                return state
         }
     }
 
     const errorMessage = (state = null, action) => {
         if (action.filter !== filter) {
-        return state
+            return state
         }
         switch (action.type) {
-        case FETCH_TODOS_FAILURE:
-        case DELETE_TODO_FAILURE:
-        case ADD_TODO_FAILURE:
-        case TOGGLE_TODO_FAILURE:
-            return action.message
-        case FETCH_TODOS_REQUEST:
-        case FETCH_TODOS_SUCCESS:
-            return null
-        default:
-            return state
+            case FETCH_TODOS_FAILURE:
+            case DELETE_TODO_FAILURE:
+            case ADD_TODO_FAILURE:
+            case TOGGLE_TODO_FAILURE:
+                return action.message
+            case FETCH_TODOS_REQUEST:
+            case FETCH_TODOS_SUCCESS:
+                return null
+            default:
+                return state
         }
     }
 

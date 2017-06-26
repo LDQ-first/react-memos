@@ -71,9 +71,9 @@ export const addTodo = (text, due) => (dispatch) => {
             ...response.attributes,
             id: response.id
         }
-        console.log('response: ', response)
+       /* console.log('response: ', response)
         console.log('receivedTodo: ', receivedTodo)
-        console.log('schema.todo: ', schema.todo)
+        console.log('schema.todo: ', schema.todo)*/
         console.log('normalize(receivedTodo, schema.todo): ', 
         normalize(receivedTodo, schema.todo))
         dispatch({
@@ -185,3 +185,4 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
     }
   )
 }
+

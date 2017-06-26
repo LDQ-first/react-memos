@@ -8,9 +8,9 @@ import createList, * as fromList from './createList'
 api.initLeanCloud()
 
 const listByFilter = combineReducers({
-    all: createList('all'),
-    active: createList('active'),
-    completed: createList('completed')
+  all: createList('all'),
+  active: createList('active'),
+  completed: createList('completed')
 })
 
 export default combineReducers({
@@ -58,6 +58,8 @@ export const getVisibleTodos = (state, filter) => {
     console.log('sortedTodos: ', sortedTodos)
     return sortedTodos
 }
+
+
 
 export const getIsFetching = (state, filter) =>
   fromList.getIsFetching(state.listByFilter[filter])

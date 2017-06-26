@@ -28,6 +28,7 @@ const FloatBtn = styled(({active, ...rest}) => <FloatingActionButton {...rest} /
 
 export default ({toggleAddToDo,isAdding}) => (
     <FloatBtn
+        secondary
         active={isAdding}
         onClick={() => toggleAddToDo() }>
         <ContentAdd />

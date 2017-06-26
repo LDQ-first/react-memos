@@ -7,7 +7,7 @@ import BottomNavLink from '../styled/BottomNavLink'
 
 export default ({filter}) => {
     const mapFilterToItemConfig = () => {
-        switch(filter) {
+        switch (filter) {
             case 'all' :
                 return {
                     icon: (<EventBusy />),
@@ -23,6 +23,11 @@ export default ({filter}) => {
                 icon: (<EventAvailable />),
                 label: 'Completed'
                 }
+            default:
+                return {
+                    icon: (<EventBusy />),
+                    label: 'Everything'
+                }
         }
     }
 
@@ -31,6 +36,7 @@ export default ({filter}) => {
     return (
         <BottomNavLink
             to={!filter ? '/all' : `/${filter}`}
+            exact
             activeClassName={'btn-active'}
         >
             <BottomNavigationItem 
