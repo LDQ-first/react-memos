@@ -38,10 +38,10 @@ export default class Todo extends Component {
                     redText={isToday}
                     underlineStyle={{borderColor: 'transparent'}}
                     underlineDisabledStyle={{border: 'none'}}
-                    onChange={() => {
-                        this.handleOnChange(this.input.getValue())
-                    }}
                     innerRef={node => this.input = node}
+                    onChange={(e) => {
+                        this.handleOnChange(e.target.value)
+                    }}
                 />
                 <DeleteBtn
                     onClick={handleDelete}

@@ -24,7 +24,7 @@ export default ({ dateInfo, todosByDue, toggleTodo, editTodo, deleteTodo }) => (
                 {...todo}
                 handleOnCheck = {()=> toggleTodo(todo.id)}
                 handleDelete = {() => deleteTodo(todo.id)}
-                handleOnChange = {() => editTodo(todo.id)}
+                handleOnChange = {(value) => editTodo(todo.id, value)}
         />
         )}
     </CSSTransitionGroup>

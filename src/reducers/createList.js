@@ -25,6 +25,7 @@ export default (filter) => {
     }
 
     const ids = (state = [], action) => {
+        console.log('ids');
         switch(action.type) {
             case FETCH_TODOS_SUCCESS:
                 return filter === action.filter
@@ -44,6 +45,7 @@ export default (filter) => {
     }
 
      const isFetching = (state = false, action) => {
+         console.log('isFetching');
         if (action.filter !== filter) {
             return state
         }
@@ -61,6 +63,7 @@ export default (filter) => {
     }
 
     const errorMessage = (state = null, action) => {
+         console.log('errorMessage');
         if (action.filter !== filter) {
             return state
         }

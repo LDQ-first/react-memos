@@ -91,6 +91,7 @@ export const addTodo = (text, due) => (dispatch) => {
 }
 
 export const editTodo = (id, text) => (dispatch) => {
+  console.log('text: ', text);
   api.editTodo(id, text).then((response) => {
     const receivedTodo = {
       ...response.attributes,
