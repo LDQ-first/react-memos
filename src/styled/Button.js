@@ -21,7 +21,7 @@ const fontSize = {
 }
 
 const Button = styled(
-  ({hide, login, bigger, logout, ...rest}) =>
+  ({hide, login, bigger, logout, ...rest}) => 
     <FlatButton {...rest} />)`
   margin: ${styledProps(margin)} !important;
   & span {

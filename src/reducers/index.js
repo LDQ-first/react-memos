@@ -43,7 +43,7 @@ export const getCurrentUser = (state) =>
 export const getVisibleTodos = (state, filter) => {
     const ids = fromList.getIds(state.listByFilter[filter])
     const sortedTodos = {};
-    console.log('ids: ', ids);
+   /* console.log('ids: ', ids);*/
     console.log('state: ', state)
     console.log('filter: ', filter)
     ids.map(id => fromById.getTodo(state.byId, id))

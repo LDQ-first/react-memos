@@ -1,4 +1,4 @@
-# react-memos-2
+# react-memos
 
 
 ## 结构

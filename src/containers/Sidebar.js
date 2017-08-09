@@ -70,7 +70,7 @@ const SideBar = ({isSidebarOpen, toggleSideBar, isLogged}) => (
                  />
             </NormalLink>
             <NormalLink
-                 href='https://github.com/LDQ-first/react-memos-2'
+                 href='https://github.com/LDQ-first/react-memos'
                  target='_blank'>
                 <MenuItem 
                     primaryText={'Project'}
